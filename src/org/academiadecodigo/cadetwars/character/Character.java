@@ -7,7 +7,7 @@ import org.academiadecodigo.cadetwars.Skill;
 public abstract class Character {
     private int health;
     private int defense;
-    private int armor;
+    // private int armor;
     private int strength;
     private String name;
     private boolean isDead;

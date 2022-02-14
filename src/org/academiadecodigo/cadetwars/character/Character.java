@@ -3,15 +3,21 @@ package org.academiadecodigo.cadetwars.character;
 import org.academiadecodigo.cadetwars.Action;
 import org.academiadecodigo.cadetwars.Randomizer;
 import org.academiadecodigo.cadetwars.Skill;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Character {
     private int health;
     private int defense;
-    // private int armor;
+    private double defenseMultiplier;
     private int strength;
     private String name;
     private boolean isDead;
     private double hitChance;
+    private Picture sprite;
+
+    public Character() {
+        defenseMultiplier = 0.1;
+    }
 
     public int getHealth() {
         return health;
@@ -58,6 +64,7 @@ public abstract class Character {
     public void focus() {
         strength += Randomizer.getRandomNumber(5, 10);
         hitChance += 0.05;
+        defenseMultiplier += 0.05;
     }
 
     public void die() {
@@ -65,7 +72,7 @@ public abstract class Character {
     }
 
     public void takeDamage(int damage) {
-        int damageToTake = damage - defense;
+        int damageToTake = (int) (damage - Math.ceil(defense * defenseMultiplier));
 
         if (health - damageToTake <= 0) {
             health = 0;

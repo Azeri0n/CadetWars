@@ -11,10 +11,6 @@ public class Player extends Character {
        setStrength(10);
     }
 
-    public void attack(Enemy enemy) {
-
-    }
-
     @Override
     public String toString() {
         return "Player " + getName() + " has " + getHealth() + " health and " + getDefense() + " defense";

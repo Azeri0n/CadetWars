@@ -11,7 +11,7 @@ public class Battle {
     private Character[] fighters;
     private Picture background;
     private PlayerInput playerInput;
-    private boolean isOver;
+    private boolean turnIsOver;
 
     public Battle(Player player, Enemy enemy) {
         this.player = player;
@@ -19,7 +19,7 @@ public class Battle {
         playerInput = new PlayerInput(player, enemy);
         fighters = new Character[]{player, enemy};
         background = new Picture(0, 0, "Backgrounds/Battleground1.png");
-        isOver = false;
+        turnIsOver = false;
     }
 
     public void startBattle() {
@@ -37,13 +37,18 @@ public class Battle {
             Action randomAction = Action.values()[Randomizer.getRandomNumber(0, 3)];
             character.doAction(randomAction, player);
         } else {
-            // wait for player input ???
-            playerInput.timeForInput();
+            turnIsOver = false;
+            while (!turnIsOver) {
+                // wait for player input ???
+                playerInput.timeForInput();
+                // do action after pressing key
+                // do animation
+                turnIsOver = true;
+            }
         }
     }
 
     public void endBattle() {
-        isOver = true;
         background.delete();
     }
 }

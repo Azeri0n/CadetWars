@@ -10,10 +10,12 @@ public class Battle {
     private Enemy enemy;
     private Character[] fighters;
     private Picture background;
+    private PlayerInput playerInput;
 
     public Battle(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
+        playerInput = new PlayerInput(player, enemy);
         fighters = new Character[]{player, enemy};
         background = new Picture(0, 0, "Backgrounds/Battleground1.png");
     }
@@ -33,7 +35,7 @@ public class Battle {
             Action randomAction = Action.values()[Randomizer.getRandomNumber(0, 3)];
             character.doAction(randomAction, player);
         } else {
-            new PlayerInput(player, enemy);
+            playerInput.timeForInput();
         }
     }
 

@@ -11,12 +11,18 @@ public class PlayerInput implements KeyboardHandler {
     private Keyboard keyboard;
     private Player player;
     private Enemy enemy;
+    private boolean isTimeForInput;
 
     public PlayerInput(Player player, Enemy enemy) {
         keyboard = new Keyboard(this);
         this.player = player;
         this.enemy = enemy;
+        isTimeForInput = false;
         createKeyboardEvents();
+    }
+
+    public void timeForInput() {
+        isTimeForInput = true;
     }
 
     public void createKeyboardEvents() {
@@ -49,10 +55,30 @@ public class PlayerInput implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_UP -> player.doAction(Action.ATTACK, enemy);
-            case KeyboardEvent.KEY_DOWN -> player.doAction(Action.DEFEND, enemy);
-            case KeyboardEvent.KEY_LEFT -> player.doAction(Action.FOCUS, enemy);
-            case KeyboardEvent.KEY_RIGHT -> player.doAction(Action.SKILL, enemy);
+            case KeyboardEvent.KEY_UP -> {
+                if (isTimeForInput) {
+                    player.doAction(Action.ATTACK, enemy);
+                    isTimeForInput = false;
+                }
+            }
+            case KeyboardEvent.KEY_DOWN -> {
+                if (isTimeForInput) {
+                    player.doAction(Action.DEFEND, enemy);
+                    isTimeForInput = false;
+                }
+            }
+            case KeyboardEvent.KEY_LEFT -> {
+                if (isTimeForInput) {
+                    player.doAction(Action.FOCUS, enemy);
+                    isTimeForInput = false;
+                }
+            }
+            case KeyboardEvent.KEY_RIGHT -> {
+                if (isTimeForInput) {
+                    player.doAction(Action.SKILL, enemy);
+                    isTimeForInput = false;
+                }
+            }
         }
     }
 

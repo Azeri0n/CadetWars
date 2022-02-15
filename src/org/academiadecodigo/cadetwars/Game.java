@@ -16,9 +16,22 @@ public class Game {
         enemies = new Enemy[]{new Enemy1()};
     }
 
+    public void createBattles() {
+        Battle battle = new Battle(player, enemies[0]);
+        battles = new Battle[1];
+        battles[0] = battle;
+    }
+
     public void start(String playerName) {
         player = new Player(playerName);
         createEnemies();
+        for (Battle battle : battles) {
+            battle.startBattle();
+            while (!player.isDead() && !enemies[0].isDead()) {
+                battle.doBattle();
+            }
+            battle.endBattle();
+        }
         // start itterating through every battle
     }
 

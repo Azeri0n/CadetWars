@@ -11,6 +11,7 @@ public class Battle {
     private Character[] fighters;
     private Picture background;
     private PlayerInput playerInput;
+    private boolean isOver;
 
     public Battle(Player player, Enemy enemy) {
         this.player = player;
@@ -18,16 +19,17 @@ public class Battle {
         playerInput = new PlayerInput(player, enemy);
         fighters = new Character[]{player, enemy};
         background = new Picture(0, 0, "Backgrounds/Battleground1.png");
+        isOver = false;
     }
 
     public void startBattle() {
         background.draw();
-        while (!player.isDead() && !enemy.isDead()) {
-            for (Character character : fighters) {
-               takeTurn(character);
-            }
+    }
+
+    public void doBattle() {
+        for (Character character : fighters) {
+            takeTurn(character);
         }
-        endBattle();
     }
 
     public void takeTurn(Character character) {
@@ -40,6 +42,7 @@ public class Battle {
     }
 
     public void endBattle() {
-
+        isOver = true;
+        background.delete();
     }
 }

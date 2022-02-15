@@ -37,6 +37,7 @@ public class Battle {
             Action randomAction = Action.values()[Randomizer.getRandomNumber(0, 3)];
             character.doAction(randomAction, player);
         } else {
+            // wait for player input ???
             playerInput.timeForInput();
         }
     }

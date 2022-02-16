@@ -10,10 +10,11 @@ public class Game {
     private Enemy[] enemies;
     private Battle[] battles;
     private MainMenu menu;
-    private final int NUMBER_OF_ENEMIES = 5;
+    private final int NUMBER_OF_ENEMIES = 1;
 
     public void createEnemies() {
-        enemies = new Enemy[]{new Enemy1()};
+        enemies = new Enemy[NUMBER_OF_ENEMIES];
+        enemies[0] = new Enemy1();
     }
 
     public void createBattles() {

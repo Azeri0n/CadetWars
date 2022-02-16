@@ -55,30 +55,32 @@ public class PlayerInput implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_UP -> {
+            case KeyboardEvent.KEY_UP:
                 if (isTimeForInput) {
                     player.doAction(Action.ATTACK, enemy);
                     isTimeForInput = false;
                 }
-            }
-            case KeyboardEvent.KEY_DOWN -> {
+            break;
+            case KeyboardEvent.KEY_DOWN:
                 if (isTimeForInput) {
                     player.doAction(Action.DEFEND, enemy);
                     isTimeForInput = false;
                 }
-            }
-            case KeyboardEvent.KEY_LEFT -> {
+            break;
+            case KeyboardEvent.KEY_LEFT:
                 if (isTimeForInput) {
                     player.doAction(Action.FOCUS, enemy);
                     isTimeForInput = false;
                 }
-            }
-            case KeyboardEvent.KEY_RIGHT -> {
+            break;
+            case KeyboardEvent.KEY_RIGHT:
                 if (isTimeForInput) {
                     player.doAction(Action.SKILL, enemy);
                     isTimeForInput = false;
                 }
-            }
+            break;
+            default:
+                System.out.println("Something horrible has happened!");
         }
     }
 

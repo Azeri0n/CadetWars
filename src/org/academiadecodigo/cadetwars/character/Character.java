@@ -88,11 +88,20 @@ public abstract class Character {
 
     public void doAction(Action action, Character character) {
         switch (action) {
-            case ATTACK -> attack(character);
-            case DEFEND -> defend();
-            case FOCUS -> focus();
-            case SKILL -> useSkill();
-            default -> System.out.println("Something horrible has happened.");
+            case ATTACK:
+                attack(character);
+                break;
+            case DEFEND:
+                defend();
+                break;
+            case FOCUS:
+                focus();
+                break;
+            case SKILL:
+                useSkill();
+                break;
+            default:
+                System.out.println("Something horrible has happened.");
         }
     }
 

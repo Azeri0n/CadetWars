@@ -1,7 +1,7 @@
 package org.academiadecodigo.cadetwars;
 
-//import sun.audio.AudioPlayer;
-//import sun.audio.AudioStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

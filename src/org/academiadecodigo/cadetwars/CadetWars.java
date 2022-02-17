@@ -13,6 +13,11 @@ public class CadetWars {
         Enemy1 enemy = new Enemy1();
 
         Battle battle = new Battle(joao, enemy);
-        battle.startBattle();
+        try {
+            battle.startBattle();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }

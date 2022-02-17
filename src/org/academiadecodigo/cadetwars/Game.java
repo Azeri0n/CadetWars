@@ -23,7 +23,7 @@ public class Game {
         battles[0] = battle;
     }
 
-    public void start(String playerName) {
+    public void start(String playerName) throws InterruptedException {
         player = new Player(playerName);
         createEnemies();
         for (Battle battle : battles) {

@@ -12,18 +12,31 @@ public class Battle {
     private Picture background;
     private PlayerInput playerInput;
     private boolean turnIsOver;
+    private KnightAnimation knightAnimation;
+    private KnightInput knightInput;
 
     public Battle(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
         playerInput = new PlayerInput(player, enemy);
         fighters = new Character[]{player, enemy};
-        background = new Picture(0, 0, "Backgrounds/Battleground1.png");
+        background = new Picture(Background.PADDING, Background.PADDING, "Resources/Backgrounds/background.jpeg");
         turnIsOver = false;
+        knightAnimation = new KnightAnimation();
+        knightInput = new KnightInput(knightAnimation);
     }
 
-    public void startBattle() {
+    public void startBattle() throws InterruptedException {
         background.draw();
+
+        while (true) {
+            knightAnimation.chooseAnimation("idle-2");
+            if (knightInput.isAttacking() == true) {
+
+                knightAnimation.chooseAnimation("attack2");
+
+            }
+        }
     }
 
     public void doBattle() {

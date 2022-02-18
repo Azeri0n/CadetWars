@@ -41,7 +41,11 @@ public class Battle {
 
     public void doBattle() {
         for (Character character : fighters) {
-            takeTurn(character);
+            if (!character.isDead()) {
+                takeTurn(character);
+            } else {
+                endBattle();
+            }
         }
     }
 

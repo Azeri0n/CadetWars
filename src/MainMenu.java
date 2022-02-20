@@ -1,17 +1,17 @@
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class MainMenu {
 
-    private SoundPlayer soundPlayer;
+    private Sound menuMusic;
 
-    public MainMenu() {
-        soundPlayer = new SoundPlayer("resources/Music/main-menu.wav");
+    public void startMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        menuMusic = new Sound("main-menu.wav");
+        menuMusic.play();
     }
 
-    public void startMenu() {
-        soundPlayer = new SoundPlayer("resources/Music/main-menu.wav");
-        soundPlayer.soundPlay();
-    }
-
-    public void stopMenu() {
-        soundPlayer.soundStop();
+    public void stopMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        menuMusic.stop();
     }
 }

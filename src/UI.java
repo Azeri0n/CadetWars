@@ -48,8 +48,8 @@ public class UI {
     }
 
     public void createCurrentPlayerArrow() {
-        pointTurnPlayer1 = new Picture(50, 350, "resources/UI/icons/PointTurn1.png");
-        pointTurnPlayer2 = new Picture(700, 350, "resources/UI/icons/PointTurn2.png");
+        pointTurnPlayer1 = new Picture(50, 350, "PointTurn1.png");
+        pointTurnPlayer2 = new Picture(700, 350, "PointTurn2.png");
     }
 
     public void deleteCurrentPlayerArrow() {
@@ -64,16 +64,16 @@ public class UI {
     }
 
     public void createVictoryPlayer1() {
-        victoryPlayer1 = new Picture(155, 50, "resources/UI/icons/POneWins.png");
+        victoryPlayer1 = new Picture(155, 50, "POneWins.png");
         victoryPlayer1.draw();
-        victoryKeys = new Picture(270, 440, "resources/UI/icons/PressForMenuQuitCentered2.png");
+        victoryKeys = new Picture(270, 440, "PressForMenuQuitCentered2.png");
         victoryKeys.draw();
     }
 
     public void createVictoryPlayer2() {
-        victoryPlayer2 = new Picture(155, 50, "resources/UI/icons/PTwoWins.png");
+        victoryPlayer2 = new Picture(155, 50, "PTwoWins.png");
         victoryPlayer2.draw();
-        victoryKeys = new Picture(270, 440, "resources/UI/icons/PressForMenuQuitCentered2.png");
+        victoryKeys = new Picture(270, 440, "PressForMenuQuitCentered2.png");
         victoryKeys.draw();
     }
 
@@ -83,26 +83,26 @@ public class UI {
         player1rec.setColor(Color.RED);
         player2rec = new Rectangle(710, 270, player2.getHealth(), 30);
         player2rec.setColor(Color.RED);
-        player1HealthBorder = new Picture(100, 250, "resources/UI/hpBarUiPlayer.png");
-        player2HealthBorder = new Picture(465, 250, "resources/UI/hpBarUiEnemy.png");
+        player1HealthBorder = new Picture(100, 250, "hpBarUiPlayer.png");
+        player2HealthBorder = new Picture(465, 250, "hpBarUiEnemy.png");
     }
 
     public void createIcons() {
-        aButton = new Picture(30, 395, "resources/UI/icons/ActionButtons/AButton.png");
+        aButton = new Picture(30, 395, "AButton.png");
         aButton.grow(-100, -100);
-        dButton = new Picture(120, 395, "resources/UI/icons/ActionButtons/DButton.png");
+        dButton = new Picture(120, 395, "DButton.png");
         dButton.grow(-100, -100);
-        sButton = new Picture(75, 395, "resources/UI/icons/ActionButtons/SButton.png");
+        sButton = new Picture(75, 395, "SButton.png");
         sButton.grow(-100, -100);
-        wButton = new Picture(75, 350, "resources/UI/icons/ActionButtons/WButton.png");
+        wButton = new Picture(75, 350, "WButton.png");
         wButton.grow(-100, -100);
-        upButton = new Picture(487, 350, "resources/UI/icons/ActionButtons/UpButton.png");
+        upButton = new Picture(487, 350, "UpButton.png");
         upButton.grow(-100, -100);
-        downButton = new Picture(487, 395, "resources/UI/icons/ActionButtons/DownButton.png");
+        downButton = new Picture(487, 395, "DownButton.png");
         downButton.grow(-100, -100);
-        leftButton = new Picture(442, 395, "resources/UI/icons/ActionButtons/LeftButton.png");
+        leftButton = new Picture(442, 395, "LeftButton.png");
         leftButton.grow(-100, -100);
-        rightButton = new Picture(532, 395, "resources/UI/icons/ActionButtons/RightButton.png");
+        rightButton = new Picture(532, 395, "RightButton.png");
         rightButton.grow(-100, -100);
     }
 

@@ -1,10 +1,14 @@
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Battle {
 
     private Player player1;
     private Player player2;
     private Player currentPlayer;
     private boolean hasStarted;
-    private SoundPlayer soundPlayer;
+    private Sound battleMusic;
     private boolean hasMusic;
 
     public Battle(Player player1, Player player2) {
@@ -15,7 +19,6 @@ public class Battle {
         } else
             currentPlayer = player2;
         hasStarted = false;
-        soundPlayer = new SoundPlayer("resources/Music/battle.wav");
     }
 
     public Player getCurrentPlayer() {
@@ -34,10 +37,26 @@ public class Battle {
     }
 
     public void endBattle() {
-        soundPlayer.soundStop();
+        try {
+            battleMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         hasMusic = false;
-        soundPlayer = new SoundPlayer("resources/Music/VictoryMeme.wav");
-        soundPlayer.soundPlay();
+        try {
+            battleMusic = new Sound("VictoryMeme.wav");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        battleMusic.play();
     }
 
     public void startBattle() {
@@ -47,13 +66,21 @@ public class Battle {
             currentPlayer = player2;
         }
         hasStarted = true;
-        soundPlayer = new SoundPlayer("resources/Music/battle.wav");
-        soundPlayer.soundPlay();
+        try {
+            battleMusic = new Sound("battle.wav");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        battleMusic.play();
         hasMusic = true;
     }
 
-    public SoundPlayer getSoundPlayer() {
-        return soundPlayer;
+    public Sound getSound() {
+        return battleMusic;
     }
 
     public boolean hasStarted() {

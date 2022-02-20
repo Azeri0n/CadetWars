@@ -3,6 +3,10 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class PlayerInput implements KeyboardHandler {
 
     private Keyboard keyboard;
@@ -18,9 +22,9 @@ public class PlayerInput implements KeyboardHandler {
     private boolean deadState2;
     private Player.LastResort usedSkillPlayer1;
     private Player.LastResort usedSkillPlayer2;
-    private SoundPlayer player1hit;
-    private SoundPlayer player2hit;
-    private SoundPlayer meteorSound;
+    private Sound player1hit;
+    private Sound player2hit;
+    private Sound meteorSound;
 
     public PlayerInput(Player player1, Player player2, Battle battle, MainMenu menu, Animator animator, UI ui) {
         keyboard = new Keyboard(this);
@@ -32,18 +36,8 @@ public class PlayerInput implements KeyboardHandler {
         gameAnimation = new GameAnimation();
         this.ui = ui;
         gameAnimation.start();
-        //animator.getTextAnimation().start();
         createKeyboardEvents();
     }
-
-
-/*    public boolean hasStarted() {
-        return started;
-    }
-
-    public void setStarted(boolean started) {
-        this.started = started;
-    }*/
 
     public void endBattleAfterDeath() {
         if (player1.isDead() || player2.isDead()) {
@@ -51,10 +45,6 @@ public class PlayerInput implements KeyboardHandler {
             started = false;
         }
         gameAnimation.interrupt();
-    }
-
-    public boolean isStarted() {
-        return started;
     }
 
     public void createKeyboardEvents() {
@@ -132,8 +122,16 @@ public class PlayerInput implements KeyboardHandler {
                     if (battle.getCurrentPlayer() == player2) {
                         usedSkillPlayer2 = player2.useSkill(player1);
                         if (usedSkillPlayer2 == Player.LastResort.METEOR) {
-                            meteorSound = new SoundPlayer("resources/Music/WOW.wav");
-                            meteorSound.soundPlay();
+                            try {
+                                meteorSound = new Sound("WOW.wav");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (UnsupportedAudioFileException e) {
+                                e.printStackTrace();
+                            } catch (LineUnavailableException e) {
+                                e.printStackTrace();
+                            }
+                            meteorSound.play();
                         }
                         endBattleAfterDeath();
                         animator.setLastResorting2(true);
@@ -155,8 +153,16 @@ public class PlayerInput implements KeyboardHandler {
                     if (battle.getCurrentPlayer() == player2) {
                         player2.attack(player1);
                         animator.setAttacking2(true);
-                        player2hit = new SoundPlayer("resources/Music/Punch.wav");
-                        player2hit.soundPlay();
+                        try {
+                            player2hit = new Sound("WOW.wav");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedAudioFileException e) {
+                            e.printStackTrace();
+                        } catch (LineUnavailableException e) {
+                            e.printStackTrace();
+                        }
+                        player2hit.play();
                         endBattleAfterDeath();
                         battle.changePlayer();
                     }
@@ -176,8 +182,16 @@ public class PlayerInput implements KeyboardHandler {
                     if (battle.getCurrentPlayer() == player1) {
                         usedSkillPlayer1 = player1.useSkill(player2);
                         if (usedSkillPlayer1 == Player.LastResort.METEOR) {
-                            meteorSound = new SoundPlayer("resources/Music/WOW.wav");
-                            meteorSound.soundPlay();
+                            try {
+                                meteorSound = new Sound("WOW.wav");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (UnsupportedAudioFileException e) {
+                                e.printStackTrace();
+                            } catch (LineUnavailableException e) {
+                                e.printStackTrace();
+                            }
+                            meteorSound.play();
                         }
                         endBattleAfterDeath();
                         animator.setLastResorting(true);
@@ -200,8 +214,16 @@ public class PlayerInput implements KeyboardHandler {
                     if (battle.getCurrentPlayer() == player1) {
                         player1.attack(player2);
                         animator.setAttacking(true);
-                        player1hit = new SoundPlayer("resources/Music/swordslash.wav");
-                        player1hit.soundPlay();
+                        try {
+                            player1hit = new Sound("WOW.wav");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedAudioFileException e) {
+                            e.printStackTrace();
+                        } catch (LineUnavailableException e) {
+                            e.printStackTrace();
+                        }
+                        player1hit.play();
                         endBattleAfterDeath();
 
                         battle.changePlayer();
@@ -210,7 +232,15 @@ public class PlayerInput implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_SPACE:
                 if (!started && !battle.hasMusic()) {
-                    menu.stopMenu();
+                    try {
+                        menu.stopMenu();
+                    } catch (UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                    }
                     battle.startBattle();
                     gameAnimation.interrupt();
                     animator.setStarted(true);
@@ -224,11 +254,27 @@ public class PlayerInput implements KeyboardHandler {
                 }
             case KeyboardEvent.KEY_R:
                 battle.endBattle();
-                menu.startMenu();
+                try {
+                    menu.startMenu();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
                 player1.revive();
                 player2.revive();
                 animator.setStarted(false);
-                battle.getSoundPlayer().soundStop();
+                try {
+                    battle.getSound().stop();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
                 gameAnimation.interrupt();
                 break;
 

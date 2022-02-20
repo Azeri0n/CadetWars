@@ -106,8 +106,8 @@ public class Animator {
         if (!started) {
             while (this.currentFrame <= this.totalFrames) {
                 Thread.sleep(delay);
-                Picture background1 = new Picture(10, 0, "resources/Background/BackgroundFrame" + currentFrame + ".png");
-                Picture backgroundText = new Picture(200, 280, "resources/Background/BackgroundTextFrame" + currentFrame + ".png");
+                Picture background1 = new Picture(10, 0, "BackgroundFrame" + currentFrame + ".png");
+                Picture backgroundText = new Picture(195, 280, "BackgroundTextFrame" + currentFrame + ".png");
 
                 currentPicture4.delete();
                 currentPicture2.delete();
@@ -123,9 +123,9 @@ public class Animator {
         } else {
             while (this.currentFrame <= this.totalFrames) {
                 Thread.sleep(delay);
-                Picture player1 = new Picture(115, 275, "resources/FireWarrior/Warrior" + animation1 + "Frame" + currentFrame + ".png");
-                Picture player2 = new Picture(565, 330, "resources/Animations/MonkWarrior/Monk" + animation2 + "Frame" + currentFrame + ".png");
-                Picture background = new Picture(10, 0, "resources/Background/BackgroundFrame" + currentFrame + ".png");
+                Picture player1 = new Picture(115, 275, "Warrior" + animation1 + "Frame" + currentFrame + ".png");
+                Picture player2 = new Picture(565, 330, "Monk" + animation2 + "Frame" + currentFrame + ".png");
+                Picture background = new Picture(10, 0, "BackgroundFrame" + currentFrame + ".png");
                 player1.grow(104, 53); // image size
                 player2.grow(82, 53); // image size
 

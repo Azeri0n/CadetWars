@@ -119,8 +119,9 @@ public class PlayerInput implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_DOWN:
                 if (battle.hasStarted() && !player1.isDead() && !player2.isDead()) {
-                    if (battle.getCurrentPlayer() == player2) {
+                    if (battle.getCurrentPlayer() == player2 && !animator.isLastResorting()) {
                         usedSkillPlayer2 = player2.useSkill(player1);
+                        animator.setLastResorting2(true);
                         if (usedSkillPlayer2 == Player.LastResort.METEOR) {
                             try {
                                 meteorSound = new Sound("WOW.wav");
@@ -134,14 +135,13 @@ public class PlayerInput implements KeyboardHandler {
                             meteorSound.play();
                         }
                         endBattleAfterDeath();
-                        animator.setLastResorting2(true);
                         battle.changePlayer();
                     }
                 }
                 break;
             case KeyboardEvent.KEY_RIGHT:
                 if (battle.hasStarted() && !player1.isDead() && !player2.isDead()) {
-                    if (battle.getCurrentPlayer() == player2) {
+                    if (battle.getCurrentPlayer() == player2 ) {
                         player2.defend();
                         endBattleAfterDeath();
                         battle.changePlayer();
@@ -150,7 +150,7 @@ public class PlayerInput implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_LEFT:
                 if (battle.hasStarted() && !player1.isDead() && !player2.isDead()) {
-                    if (battle.getCurrentPlayer() == player2) {
+                    if (battle.getCurrentPlayer() == player2 && !animator.isAttacking())  {
                         player2.attack(player1);
                         animator.setAttacking2(true);
                         try {
@@ -179,8 +179,9 @@ public class PlayerInput implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_S:
                 if (battle.hasStarted() && !player1.isDead() && !player2.isDead()) {
-                    if (battle.getCurrentPlayer() == player1) {
+                    if (battle.getCurrentPlayer() == player1  && !animator.isLastResorting2()) {
                         usedSkillPlayer1 = player1.useSkill(player2);
+                        animator.setLastResorting(true);
                         if (usedSkillPlayer1 == Player.LastResort.METEOR) {
                             try {
                                 meteorSound = new Sound("WOW.wav");
@@ -194,7 +195,6 @@ public class PlayerInput implements KeyboardHandler {
                             meteorSound.play();
                         }
                         endBattleAfterDeath();
-                        animator.setLastResorting(true);
                         battle.changePlayer();
                     }
                 }
@@ -211,9 +211,10 @@ public class PlayerInput implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_D:
                 if (battle.hasStarted() && !player1.isDead() && !player2.isDead()) {
-                    if (battle.getCurrentPlayer() == player1) {
+                    if (battle.getCurrentPlayer() == player1 && !animator.isAttacking2()) {
                         player1.attack(player2);
                         animator.setAttacking(true);
+
                         try {
                             player1hit = new Sound("WOW.wav");
                         } catch (IOException e) {
@@ -225,13 +226,14 @@ public class PlayerInput implements KeyboardHandler {
                         }
                         player1hit.play();
                         endBattleAfterDeath();
-
                         battle.changePlayer();
                     }
                 }
                 break;
             case KeyboardEvent.KEY_SPACE:
-                if (!started && !battle.hasMusic()) {
+                if (!animator.isStarted() && !battle.hasMusic()) {
+                    animator.setStarted(true);
+                    System.out.println(animator.isStarted());
                     try {
                         menu.stopMenu();
                     } catch (UnsupportedAudioFileException e) {
@@ -243,7 +245,8 @@ public class PlayerInput implements KeyboardHandler {
                     }
                     battle.startBattle();
                     gameAnimation.interrupt();
-                    animator.setStarted(true);
+
+
                     try {
                         gameAnimation.start();
                     } catch (Exception e) {

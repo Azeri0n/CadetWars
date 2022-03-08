@@ -1,4 +1,4 @@
-<project name="FinalProject" default="jarfile">
+<project name="CadetWars" default="jarfile">
 
     <target name="init">
         <property name="project.name" value="cadet-wars"/>
@@ -18,7 +18,7 @@
     </target>
 
     <target name="compile" description="Compiles the source code" depends="prepare">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" target="1.8" source="1.8">
             <classpath refid="classpath"/>
         </javac>
     </target>
@@ -28,7 +28,7 @@
     </target>
 
     <target name="jarfile" description="Archives the code" depends="compile">
-        <jar destfile="build/FinalProject.jar" basedir="build/classes">
+        <jar destfile="build/cadet-wars.jar" basedir="build/classes">
             <manifest>
                 <attribute name="Main-Class" value="Main" />
                 <attribute name="Class-Path" value="${lib.dir}"/>

@@ -25,6 +25,9 @@ public class Animator {
         this.ui = ui;
     }
 
+    public boolean isStarted() {
+        return started;
+    }
 
     public void setStarted(boolean started) {
         this.started = started;
@@ -151,6 +154,7 @@ public class Animator {
                 }
                 currentFrame++;
             }
+
         }
     }
 }
